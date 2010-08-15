@@ -1,0 +1,9 @@
+development:
+  bin_path: D:/sphinx-0.9.9/bin
+  searchd_binary_name: searchd.exe
+  indexer_binary_name: indexer.exe
+  
+production:
+  bin_path: D:/sphinx-0.9.9/bin
+  searchd_binary_name: searchd.exe
+  indexer_binary_name: indexer.exe

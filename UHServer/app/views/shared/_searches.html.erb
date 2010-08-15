@@ -1,0 +1,10 @@
+<div id="searches">
+	<% form_tag :controller => :uha_books, :action => :search do %>
+		<%= text_field_tag :search, nil, :size => 15 %>
+		<%= submit_tag "UHA", :class => "submit" %>
+	<% end %>
+	<% form_tag :controller => :diigo, :action => :search do %>
+		<%= text_field_tag :search, nil, :size => 15 %>
+		<%= submit_tag "Diigo", :class => "submit" %>
+	<% end %>
+</div>

@@ -1,0 +1,31 @@
+<div id="annos">
+	<% for note in @items %>
+		<% if @current_bookmark != note.diigo_bookmark %>
+			<% if !@current_bookmark.nil? %></ol><% end %>
+			<div id="book-info">
+				<a href="#{note.diigo_bookmark.url}">
+					<%= note.diigo_bookmark.title %>
+				</a>&nbsp;&nbsp;
+				<%= render(:partial => "tag", :collection => note.diigo_bookmark.diigo_tags )%>
+			</div>
+			<ol>
+			<% @current_bookmark = note.diigo_bookmark %>
+			<% for comment in @current_bookmark.retrieve_comments %>
+				<li><div class="anno-list">
+					<div class="anno-content"><%=h comment.content %></div>
+					<div class="anno-page">
+						<span><%= comment.created_at %></span>
+					</div>
+				</div></li>
+			<% end %>
+		<% end %>
+		<li><div class="anno-list">
+			<div class="anno-content"><%=clean_html note.content %></div>
+			<div class="anno-page">
+				<span><%= note.created_at %></span>
+			</div>
+		</div></li>
+	<% end %>
+		</ol>
+	<div class="pagination"><%= will_paginate @items %></div>
+</div>

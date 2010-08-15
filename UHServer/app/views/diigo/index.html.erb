@@ -1,0 +1,30 @@
+<div id="book-list">
+	<table >
+		<tr>
+			<th>Id</th>
+			<th></th>
+			<th>Name</th>
+			<th title="Annotations and Comments">Notes</th>
+			<th></th>
+		</tr>
+		<% for bookmark in @items %>
+			<tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+				<td><span><%= bookmark.id %></span></td>
+				<td>
+					<% form_tag :action => "destroy", :id => bookmark do%>
+						<%= image_submit_tag 'delete.gif', :alt => 'Delete Bookmark',:confirm => "Are you sure to delete '#{bookmark.title}' and all its annotations?", :class => 'image-submit' %>
+					<% end %>
+				</td>
+				<td>
+					<a href="<%= bookmark.url %>"><%= bookmark.title %></a>
+					<%= render(:partial => "tag", :collection => bookmark.diigo_tags) %>
+				</td>
+				<td class="anno-link">
+					<span><%= "&nbsp;" * (2 - bookmark.notes_count.to_s.size)%><%= link_to bookmark.notes_count, {:action => :show_notes, :bookmarkids => bookmark } %></span>
+				</td>
+				<td class="anno-date"><span><%= bookmark.diigo_updated_at.to_date %></span></td>
+			</tr>
+		<% end %>
+	</table>
+	<div class="pagination"><%= will_paginate @items %></div>
+</div>

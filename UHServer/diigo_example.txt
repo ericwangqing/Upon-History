@@ -1,0 +1,16 @@
+[{
+	"shared":"yes",
+	"user":"ericwangqing",
+	"title":"SOCKSify Ruby",
+	"updated_at":"2010/01/28 09:00:51 +0000",
+	"desc":"",
+	"comments":[],
+	"url":"http://socksify.rubyforge.org",
+	"created_at":"2010/01/28 09:00:51 +0000",
+	"annotations":[{
+		"user":"ericwangqing","comments":[],
+		"created_at":"2010/01/28 09:00:51 +0000",
+		"content":"<h2 style=\"\">What is it?</h2>\n\n      <p>\n\t<b>SOCKSify Ruby</b> redirects any TCP connection initiated by\n\ta Ruby script through a SOCKS5 proxy. It serves as a small\n\tdrop-in alternative\n\tto <a href=\"http://tsocks.sourceforge.net/\">tsocks</a>, except\n\tthat it handles Ruby programs only and doesn't leak DNS\n\tqueries.\n      </p>"
+	}],
+	"tags":"no_tag"
+}]

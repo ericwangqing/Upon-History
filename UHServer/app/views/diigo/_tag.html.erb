@@ -1,0 +1,1 @@
+<span class="diigo-tag"><%= link_to "#{tag.name}", {:controller => :diigo, :action => :show_notes_with_tag, :tag => "#{tag.name}", :banner => "#{tag.name}" }, :class => "cloud_#{tag.weight || 0}"%></span>

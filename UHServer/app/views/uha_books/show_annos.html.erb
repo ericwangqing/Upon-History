@@ -1,0 +1,21 @@
+<div id="annos">
+	<% for anno in @items %>
+		<% if @current_book != anno.uha_book %>
+			<% if !@current_book.nil? %></ol><% end %>
+			<div id="book-info"><%= anno.uha_book.title %></div>
+			<ol>
+			<% @current_book = anno.uha_book %>
+		<% end %>
+		<li><div class="anno-list">
+			<div class="anno-content"><%=h anno.content %></div>
+			<div class="anno-page">
+				<a href="<%= @current_book.link_url %>#page<%= anno.page %>">
+					p.<%= anno.page %>
+				</a>
+				<span><%= Time.at(anno.create_date / 1000).to_s(:db) if !anno.create_date.nil? %></span>
+			</div>
+		</div></li>
+	<% end %>
+		</ol>
+	<div class="pagination"><%= will_paginate @items %></div>
+</div>

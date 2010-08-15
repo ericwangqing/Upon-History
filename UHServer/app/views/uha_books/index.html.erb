@@ -1,0 +1,31 @@
+<div id="book-list">
+	<table >
+		<tr>
+			<th>Id</th>
+			<th></th>
+			<th>Name</th>
+			<th>Annos</th>
+			<th></th>
+		</tr>
+		<% for book in @items %>
+			<tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+				<td><span><%= book.id %></span></td>
+				<td>
+					<% form_tag :action => "destroy", :id => book do%>
+						<%= image_submit_tag 'delete.gif', :alt => 'Delete Book',:confirm => "Are you sure to delete '#{book.title}' and all its annotations?", :class => 'image-submit' %>
+					<% end %>
+				</td>
+				<td><a href="<%= book.link_url %>"><%= book.title %></a></td>
+				<td class="anno-link">
+					<span><%= "&nbsp;" * (5 - book.annos_count.to_s.size)%><%= link_to book.annos_count, {:action => :show_annos, :bookids => book } %></span>
+					<span><%= link_to "T", {:action => :show_annos, :controller => :uha_books, :bookids => book, :per_page => 20, :start_time => Time.now.yesterday.to_i } %></span>
+					<span><%= link_to "W", {:action => :show_annos, :controller => :uha_books, :bookids => book, :per_page => 20, :start_time => 1.weeks.ago.to_i } %></span>
+					<span><%= link_to "M", {:action => :show_annos, :controller => :uha_books, :bookids => book, :per_page => 20, :start_time => 1.months.ago.to_i } %></span>
+					<span><%= link_to "Y", {:action => :show_annos, :controller => :uha_books, :bookids => book, :per_page => 20, :start_time => 1.years.ago.to_i } %></span>
+				</td>
+				<td class="anno-date"><span><%= Time.at(book.last_ann / 1000).to_date if !book.last_ann.nil? %></span></td>
+			</tr>
+		<% end %>
+	</table>
+	<div class="pagination"><%= will_paginate @items %></div>
+</div>

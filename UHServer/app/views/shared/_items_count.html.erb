@@ -1,0 +1,4 @@
+<div id="items-count">
+	<div><%= items_count[:item_name]%>: <strong><%= items_count[:count] %></strong></div>
+	<div class="pagination"><%= will_paginate items_count[:items] %></div>
+</div>

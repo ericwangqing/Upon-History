@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Upon History Annotations</title>
+  <%= stylesheet_link_tag 'uh' %>
+	<%= javascript_include_tag :defaults %>
+</head>
+<body id="uh">
+	<div id="banner">
+		<%= image_tag "logo.png" %>
+		<%= @page_title || "Upon History" %>
+	</div>
+	<% if !@tags.blank? and @page_title != "Diigo Tags" %>
+		<div id="tags-cloud">
+			<%= render(:partial => "diigo/tag", :collection => @tags.shuffle)%>
+			<%= link_to "All Tags ...", {:controller => :diigo, :action => :show_tags }, :class => "all-tags-link"%>
+		</div>
+	<% end %>
+	<div id="columns">
+		<div id="side">
+			<a href="/uha_books">Book List</a><br />
+			<%= link_to "Today's PDF Annos", {:action => :show_annos, :controller => :uha_books, :per_page => 20, :start_time => Time.now.yesterday.to_i, :banner => "today" } %><br />
+			<%= link_to "Week's PDF Annos", {:action => :show_annos, :controller => :uha_books, :per_page => 20, :start_time => 1.weeks.ago.to_i, :banner => "week"  } %><br />
+			<%= link_to "Month's PDF Annos", {:action => :show_annos, :controller => :uha_books, :per_page => 20, :start_time => 1.months.ago.to_i, :banner => "month"  } %><br />
+			<%= link_to "Year's PDF Annos", {:action => :show_annos, :controller => :uha_books, :per_page => 20, :start_time => 1.years.ago.to_i, :banner => "year"  } %><br />
+			<br />
+			<%= link_to "Remove Empty Books", {:action => :remove_empty_anno_books, :controller => :uha_books } %><br />
+			<br />
+			<a href="/diigo">Diigo List</a><br />
+			<%= link_to "Today's Diigo", {:action => :show_notes, :controller => :diigo, :per_page => 20, :start_time => Time.now.yesterday.to_i, :banner => "today"  } %><br />
+			<%= link_to "Week's Diigo", {:action => :show_notes, :controller => :diigo, :per_page => 20, :start_time => 1.weeks.ago.to_i, :banner => "week"  } %><br />
+			<%= link_to "Month's Diigo", {:action => :show_notes, :controller => :diigo, :per_page => 20, :start_time => 1.months.ago.to_i, :banner => "month"  } %><br />
+			<%= link_to "Year's Diigo", {:action => :show_notes, :controller => :diigo, :per_page => 20, :start_time => 1.years.ago.to_i, :banner => "year"  } %><br />
+			<br />
+			<%= link_to "Test Get Diigo Bookmarks", {:action => :test_diigo, :controller => :uha_books } %><br />
+		</div>
+		<div id="main">
+			<% if flash[:notice] -%>
+				<div id="notice"><%= flash[:notice] %></div>			
+			<% end -%>
+			<div class="search-box">
+				<% if !@items.blank? %>
+					<%= render(:partial => "shared/items_count", :object => {:count => @items.total_entries, :items => @items, :item_name => @item_name || @items[0].class.name.underscore.humanize}) %>
+				<% end %>
+				<%= render(:partial => "shared/searches") %>
+			</div>
+			<%= yield %>	
+		</div>
+
+	</div>
+
+
+
+</body>
+</html>
